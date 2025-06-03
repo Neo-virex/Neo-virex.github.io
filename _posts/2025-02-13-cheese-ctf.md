@@ -70,11 +70,9 @@ Host: 10.10.26.46
 > ```text
 > root:x:0:0:root:/root:/bin/bash
 > ```
-
+> ```
 daemon\:x:1:1\:daemon:/usr/sbin:/usr/sbin/nologin
 ...
-
-> ```
 > ```
 ![Directory Listing](img3.png){: width="600" height="150" .shadow }
 
@@ -120,7 +118,7 @@ SSH’ing as **comte**:
 
 ```bash
 ssh -i ~/.ssh/id_ed25519 comte@10.10.177.192
-cat user.txt  # THM{9f2ce3df1beeecaf695b3a8560c682704c31b17a}
+cat user.txt  # THM{9f2ce3df1beeecaf695b[REDACTED]704c31b17a}
 ```
 
 ## Lateral Movement & Final Escalation
@@ -157,12 +155,12 @@ SSH to **root** and capture root flag:
 
 ```bash
 ssh -i ~/.ssh/id_ed25519 root@10.10.177.192
-cat root.txt  # THM{dca75486094810807faf4b7b0a929b11e5e0167c}
+cat root.txt  # THM{dca7548609[REDACTED]a929b11e5e0167c}
 ```
 
 ---
 
 ### Flags
 
-* **User:** `THM{9f2ce3df1beeecaf695b3a8560c682704c31b17a}`
-* **Root:** `THM{dca75486094810807faf4b7b0a929b11e5e0167c}`
+* **User:** `THM{9f2ce3df1b[REDACTED]95b3a8560c682704c31b17a}`
+* **Root:** `THM{dca754860948108[REDACTED]7b0a929b11e5e0167c}`
