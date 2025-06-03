@@ -112,24 +112,24 @@ Nmap done: 1 IP address (1 host up) scanned in 21.78 seconds
 
 ## Web Application Analysis
 
-![Screenshot From 2025-04-11 14-37-52.png](tryhackme_easy_peasy/img1.png)
+![Screenshot From 2025-04-11 14-37-52.png](img1.png)
 
 | 9fdafbd64c47471a8f54cd3fc64cd312 | md5 | candeger |
 | --- | --- | --- |
 
 ## Vulnerability Scanning
 
-![Screenshot From 2025-04-11 15-08-01.png](tryhackme_easy_peasy/img2.png)
+![Screenshot From 2025-04-11 15-08-01.png](img2.png)
 
-![Screenshot From 2025-04-11 15-08-17.png](tryhackme_easy_peasy/img3.png)
+![Screenshot From 2025-04-11 15-08-17.png](img3.png)
 
-![Screenshot From 2025-04-11 15-09-32.png](tryhackme_easy_peasy/img4.png)
+![Screenshot From 2025-04-11 15-09-32.png](img4.png)
 
-![Screenshot From 2025-04-11 15-21-49.png](tryhackme_easy_peasy/img5.png)
+![Screenshot From 2025-04-11 15-21-49.png](img5.png)
 
-![Screenshot From 2025-04-11 15-59-13.png](tryhackme_easy_peasy/img6.png)
+![Screenshot From 2025-04-11 15-59-13.png](img6.png)
 
-![Screenshot From 2025-04-11 15-59-22.png](tryhackme_easy_peasy/img7.png)
+![Screenshot From 2025-04-11 15-59-22.png](img7.png)
 
 ### terminal
 
