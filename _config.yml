@@ -32,6 +32,9 @@ github:
 twitter:
   username: neo_virex # change to your Twitter username
 
+author:
+  name: NeoVirex
+  
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
