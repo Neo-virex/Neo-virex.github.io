@@ -1,8 +1,8 @@
 ---
 title: "Project: CTF_Building"
 author: NeoVirex
-categories: [TryHackMe]
-tags: [thm]
+categories: [Project]
+tags: [CTF, Build, home-ctf]
 render_with_liquid: false
 media_subpath: /images/blogs/bunna/
 image:
