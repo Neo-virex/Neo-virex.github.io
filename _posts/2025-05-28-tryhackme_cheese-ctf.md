@@ -2,7 +2,7 @@
 title: 'TryHackMe: Cheese CTF'
 author: Neo-Virex
 date: 2025-02-13 08:00:00 +0000
-categories: [TryHackMe, CTF, Walkthrough]
+categories: [TryHackMe]
 tags: [Cheese, CTF, HackTheBox, Linux, Exploit]
 render_with_liquid: false
 media_subpath: /images/tryhackme/tryhackme_cheese_ctf/
