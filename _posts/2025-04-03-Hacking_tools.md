@@ -1,7 +1,7 @@
 ---
 title: "Hacking-Tools"
 author: NeoVirex
-categories: [TryHackMe]
+categories: [Project]
 tags: [tools]
 render_with_liquid: false
 media_subpath: /images/blogs/hacking_tools/
