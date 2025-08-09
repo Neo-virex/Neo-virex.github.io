@@ -8,10 +8,10 @@ media_subpath: /images/tryhackme/tryhackme_biohazard/
 image:
   path: room_img.png
 
-description: "This write-up documents a complete walkthrough of the “**Biohazard**” CTF challenge. It integrates the detailed steps from the reference HTML write-up (originally from the Bio-hazard TryHackMe page) with my own investigation, notes, and captured artifacts. It explores each phase in sequence **reconnaissance**, **enumeration**, **exploitation**, and **privilege escalation**—alongside captured flags, passwords, tools, and decryption paths."
+description: "This write-up documents a complete walkthrough of the Biohazard CTF challenge. It integrates the detailed steps from the reference HTML write-up (originally from the Bio-hazard TryHackMe page) with my own investigation, notes, and captured artifacts. It explores each phase in sequence reconnaissance, enumeration, exploitation, and **privilege escalation alongside captured flags, passwords, tools, and decryption paths."
 ---
 
-# 🕯️ The **Biohazard** – CTF Write-up
+# 🕯️ The Biohazard – CTF Write-up
 Created: August 3, 2025 3:27 AM
 Status: Done
 
