@@ -102,7 +102,7 @@ theme_mode: dark # [light | dark]
 cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: assets/img/main.png
+avatar: /assets/img/main.png
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
@@ -221,7 +221,10 @@ exclude:
   - "package*.json"
 
 jekyll-archives:
-  enabled: [categories, tags]
+  # Disabled to avoid duplicate generation of tag/category pages.
+  # The theme already generates tag/category pages; enabling jekyll-archives
+  # can produce the same output twice and cause conflicts.
+  enabled: []
   layouts:
     category: category
     tag: tag
