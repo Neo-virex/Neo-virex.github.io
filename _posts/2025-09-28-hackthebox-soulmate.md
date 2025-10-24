@@ -7,7 +7,7 @@ render_with_liquid: false
 media_subpath: /images/hackthebox/hackthebox_soulmate
 image:
   path: room_img.png
-description: a medium-rated TryHackMe room that focuses on exploiting vulnerabilities in a WordPress site and performing privilege escalation to obtain the flag.
+description: a medium-rated TryHackMe room that focuses on exploiting vulnerabilities in a site and performing privilege escalation to obtain the flag.
 ---
 
 # Soulmate

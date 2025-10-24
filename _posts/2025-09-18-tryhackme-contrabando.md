@@ -1,13 +1,13 @@
 ---
-title: "Hackthebox: Soulmate"
+title: "Tryhackme: Contrabando"
 author: NeoVirex
-categories: [Hackthebox]
-tags: [CTF, Hackthebox, web, FFUF, ssh, php, python]
+categories: [thm]
+tags: [CTF, thm, web, FFUF, ssh, php, python]
 render_with_liquid: false
-media_subpath: /images/hackthebox/hackthebox_soulmate
+media_subpath: /images/tryhackme/tryhackme_contrabando
 image:
-  path: room_img.png
-description: a medium-rated TryHackMe room that focuses on exploiting vulnerabilities in a WordPress site and performing privilege escalation to obtain the flag.
+  path: room-img.png
+description: Never tell me the odds.
 ---
 
 # Contrabando
