@@ -1,8 +1,8 @@
 ---
-title: "Tryhackme: Contrabando"
+title: "Tryhackme: AD: Basic Enumeration"
 author: NeoVirex
 categories: [thm]
-tags: [CTF, thm, web, FFUF, ssh, php, python]
+tags: [CTF, thm, AD, enum, Window]
 render_with_liquid: false
 media_subpath: /images/tryhackme/tryhackme_ad-enum
 image:
