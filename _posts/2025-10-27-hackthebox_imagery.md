@@ -7,7 +7,7 @@ render_with_liquid: false
 media_subpath: /images/hackthebox/hackthebox_imagery
 image:
   path: room_img.png
-description: a medium-rated 
+description: medium-rated 
 ---
 
 Completion Date: October 23, 2025 12:40 AM
