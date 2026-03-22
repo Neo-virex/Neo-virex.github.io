@@ -8,23 +8,22 @@ theme: jekyll-theme-chirpy
 # otherwise, the layout language will use the default value of 'en'.
 lang: en
 
-# Change to your timezone › https://kevinnovak.github.io/Time-Zone-Picker
-timezone:
+# Change to your timezone › https://zones.arilyn.cc
+timezone: America/Los_Angeles
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
 title: Neo-Virex # the main title
 
-tagline: Walcome # it will display as the subtitle
+tagline: Recon first. Always. # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
-   Simple blog for sharing writeups and such
+  Neo-Virex's personal blog for cyber security, CTF writeups, and tech explorations.
 
 # Fill in the protocol & hostname for your site.
-# E.g. 'https://username.github.io', note that it does not end with a '/'.
-url: "https://Neo-virex.github.io"
-
+# E.g. 'https://username.github.io', note that it does not end with a '/'
+url: "https://neo-virex.github.io"
 
 github:
   username: Neo-virex # change to your GitHub username
@@ -32,21 +31,16 @@ github:
 twitter:
   username: neo_virex # change to your Twitter username
 
-author:
-  name: NeoVirex
-  
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
   name: Neo-Virex
-  #email: example@domain.com # change to your email address
+  # email: example@domain.com # change to your email address
+  fediverse_handle: # fill in your fediverse handle. E.g. "@username@domain.com"
   links:
     # The first element serves as the copyright owner's link
     - https://x.com/neo_virex # change to your Twitter homepage
     - https://github.com/Neo-virex # change to your GitHub homepage
-    # Uncomment below to add more social links
-    # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
 
 # Site Verification Settings
 webmaster_verifications:
@@ -92,7 +86,7 @@ pageviews:
 #     light — Use the light color scheme
 #     dark — Use the dark color scheme
 #
-theme_mode: dark # [light | dark]
+theme_mode: dark # permanently dark
 
 # The CDN endpoint for media resources.
 # Notice that once it is assigned, the CDN url
@@ -102,7 +96,7 @@ theme_mode: dark # [light | dark]
 cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: /assets/img/main.png
+avatar: "/assets/img/main.png"
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
@@ -197,6 +191,8 @@ defaults:
       layout: page
       permalink: /:title/
 
+cache_dir: .jekyll-cache-local
+
 sass:
   style: compressed
 
@@ -221,10 +217,7 @@ exclude:
   - "package*.json"
 
 jekyll-archives:
-  # Disabled to avoid duplicate generation of tag/category pages.
-  # The theme already generates tag/category pages; enabling jekyll-archives
-  # can produce the same output twice and cause conflicts.
-  enabled: []
+  enabled: [categories, tags]
   layouts:
     category: category
     tag: tag

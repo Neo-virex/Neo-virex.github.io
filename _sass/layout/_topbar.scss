@@ -1,0 +1,160 @@
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as mx;
+@use '../abstracts/breakpoints' as bp;
+@use '../abstracts/placeholders';
+
+#topbar-wrapper {
+  height: v.$topbar-height;
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 1040;
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  &.topbar-hidden {
+    transform: translateY(-100%);
+  }
+}
+
+#topbar {
+  @extend %btn-color;
+
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 0.6rem 1rem;
+  gap: 1rem;
+
+  @include bp.lte(bp.get(md)) {
+    @include mx.max-w-100;
+  }
+
+  @include bp.lt(bp.get(lg)) {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  @include bp.xxxl {
+    max-width: 1050px;
+  }
+}
+
+#topbar-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: v.$font-family-heading;
+  color: var(--topbar-text-color);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  width: fit-content;
+}
+
+#topbar-nav {
+  display: none;
+  margin-left: auto;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.55rem;
+
+  .nav-link {
+    @extend %clickable-transition;
+
+    color: var(--text-muted-color);
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: 0.45rem 0.95rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+
+    &:hover,
+    &.active {
+      color: var(--topbar-text-color);
+      background: var(--card-bg);
+      border-color: var(--btn-border-color);
+      box-shadow: 0 12px 28px rgb(15 23 42 / 10%);
+      transform: translateY(-1px);
+    }
+  }
+
+  @include bp.lg {
+    display: flex;
+  }
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+
+  @include bp.lg {
+    margin-left: 0;
+  }
+}
+
+#sidebar-trigger,
+#search-trigger,
+#search-cancel {
+  display: none;
+}
+
+#sidebar-trigger,
+#search-trigger {
+  @include bp.lt(bp.get(lg)) {
+    display: block;
+  }
+}
+
+// Post page specific overrides
+body[data-layout="post"] {
+  // Hamburger (sidebar trigger) must be visible on desktop
+  #sidebar-trigger {
+    display: block !important;
+    margin-left: -83px !important; // Moved another 30px left (total 120px shift from original 37px)
+  }
+
+  // Show search trigger on desktop post pages
+  #search-trigger {
+    display: block !important;
+  }
+
+  // Nav is already hidden via d-none class in HTML, reinforce here
+  #topbar-nav {
+    display: none !important;
+  }
+
+  // Left-align breadcrumbs (remove auto margin from actions)
+  .topbar-actions {
+    margin-left: auto !important;
+  }
+
+  // Compact topbar padding
+  #topbar {
+    padding-top: 0.3rem !important;
+    padding-bottom: 0.3rem !important;
+  }
+
+  // Hide the standalone search wrapper below topbar - search is now in header
+  #search-wrapper {
+    display: none !important;
+  }
+}
+
+// Style for breadcrumb in post header
+.post-breadcrumb {
+  gap: 0;
+  color: var(--text-muted-color);
+
+  a {
+    color: var(--text-muted-color);
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--topbar-text-color);
+    }
+  }
+}

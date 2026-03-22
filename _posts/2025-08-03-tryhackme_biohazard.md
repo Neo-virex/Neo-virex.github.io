@@ -2,7 +2,7 @@
 title: "TryHackMe: Biohazard"
 author: NeoVirex
 categories: [CTF, TryHackMe]
-tags: [base64, web, ctf]
+tags: [base64, web, CTF]
 render_with_liquid: false
 media_subpath: /images/tryhackme/tryhackme_biohazard/
 image:

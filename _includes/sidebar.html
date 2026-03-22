@@ -1,0 +1,93 @@
+<!-- The Side Bar -->
+
+<aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
+  <header class="profile-wrapper">
+    <a href="{{ '/' | relative_url }}" id="avatar">
+      {%- if site.avatar != empty and site.avatar -%}
+        {%- capture avatar_url -%}
+          {% include media-url.html src=site.avatar %}
+        {%- endcapture -%}
+        <img src="{{- avatar_url -}}" width="112" height="112" alt="avatar" onerror="this.style.display='none'">
+      {%- endif -%}
+    </a>
+
+    <a class="site-title d-block" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <p class="site-subtitle fst-italic mb-0">{{ site.tagline }}</p>
+
+    <div class="profile-links mt-2 text-muted" style="font-size: 0.85rem;">
+      <div class="profile-link mb-1">
+        <i class="fas fa-map-marker-alt fa-fw me-1"></i> Mars
+      </div>
+      <div class="profile-link mb-1">
+        <i class="fas fa-link fa-fw me-1"></i> <a href="https://neo-virex.github.io" target="_blank" rel="noopener noreferrer">Neo-virex.github.io</a>
+      </div>
+      <div class="profile-link mb-1">
+        <i class="fas fa-link fa-fw me-1"></i> <a href="https://neo-virex.vercel.app/" target="_blank" rel="noopener noreferrer">https://neo-virex.vercel.app/</a>
+      </div>
+    </div>
+
+  </header>
+  <!-- .profile-wrapper -->
+
+  <nav id="sidebar-nav" class="d-lg-none w-100 mt-2 mb-auto" aria-label="Mobile Navigation">
+    <div class="d-flex flex-column align-items-center">
+      <a href="{{ '/' | relative_url }}" class="nav-link{% if page.layout == 'home' %} active{% endif %} fw-bold mb-1" style="font-size: 1rem;">
+        {{ site.data.locales[include.lang].tabs.home | default: 'Home' }}
+      </a>
+      {% for tab in site.tabs %}
+        {% capture tab_name %}{{ tab.url | split: '/' }}{% endcapture %}
+        <a
+          href="{{ tab.url | relative_url }}"
+          class="nav-link{% if tab.url == page.url %} active{% endif %} fw-bold mb-1" style="font-size: 1rem;"
+        >
+          {{ site.data.locales[include.lang].tabs.[tab_name] | default: tab.title }}
+        </a>
+      {% endfor %}
+    </div>
+  </nav>
+
+  <div class="sidebar-bottom d-flex flex-column align-items-center w-100">
+    {% assign share_url = page.url | absolute_url | url_encode %}
+    {% assign share_title = page.title | default: site.title | url_encode %}
+
+    <!-- Row 1: Primary Socials -->
+    <div class="d-flex flex-wrap align-items-center justify-content-center w-100 mb-2">
+      {% for entry in site.data.contact limit: 2 %}
+        {% assign icon_url = "" %}
+        {% case entry.type %}
+          {% when 'github' %}
+            {% capture icon_url %}https://github.com/{{ site.github.username }}{% endcapture %}
+          {% when 'twitter', 'x-twitter' %}
+            {% capture icon_url %}https://twitter.com/intent/tweet?text=Check this out: {{ share_title }}&url={{ share_url }}{% endcapture %}
+          {% else %}
+            {% assign icon_url = entry.url %}
+        {% endcase %}
+        <a href="{{ icon_url }}" aria-label="{{ entry.type }}" target="_blank" rel="noopener noreferrer">
+          <i class="{{ entry.icon }}"></i>
+        </a>
+      {% endfor %}
+    </div>
+
+    <!-- Row 2: Secondary Socials -->
+    <div class="d-flex flex-wrap align-items-center justify-content-center w-100">
+      {% for entry in site.data.contact offset: 2 %}
+        {% assign icon_url = "" %}
+        {% case entry.type %}
+          {% when 'linkedin' %}
+            {% capture icon_url %}https://www.linkedin.com/sharing/share-offsite/?url={{ share_url }}{% endcapture %}
+          {% when 'reddit' %}
+            {% capture icon_url %}https://www.reddit.com/submit?url={{ share_url }}&title={{ share_title }}{% endcapture %}
+          {% when 'bluesky' %}
+            {% capture icon_url %}https://bsky.app/intent/compose?text=Check this out: {{ share_title }} {{ share_url }}{% endcapture %}
+          {% else %}
+            {% assign icon_url = entry.url %}
+        {% endcase %}
+        <a href="{{ icon_url }}" aria-label="{{ entry.type }}" target="_blank" rel="noopener noreferrer">
+          <i class="{{ entry.icon }}"></i>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+  <!-- .sidebar-bottom -->
+</aside>
+<!-- #sidebar -->

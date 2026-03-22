@@ -1,0 +1,248 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+ROOT_DIR="$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)"
+cd "$ROOT_DIR"
+
+HOST="127.0.0.1"
+PORT="4000"
+PRODUCTION="false"
+BUILD_ONLY="false"
+OPEN_URL="false"
+LIVE_RELOAD="false"
+FORCE_POLLING="false"
+DEST_DIR=""
+EXTRA_ARGS=()
+
+die() {
+  printf 'Error: %s\n' "$*" >&2
+  exit 1
+}
+
+usage() {
+  cat <<'EOF'
+Usage:
+
+  ./start [options] [-- extra jekyll args]
+
+Options:
+  -H, --host HOST      Host to bind to. Default: 127.0.0.1
+  -P, --port PORT      Preferred port. Default: 4000
+  -p, --production     Start with JEKYLL_ENV=production
+      --build          Run a one-off build instead of the dev server
+      --live           Enable LiveReload
+      --open           Open the site in a browser
+      --force-polling  Force watch mode polling
+  -h, --help           Show this help
+
+Notes:
+  - Uses '--disable-disk-cache' to avoid stale or permission-broken cache dirs.
+  - Builds into /tmp by default so local runs do not depend on repo free space.
+  - Installs missing gems automatically for fresh clones.
+  - LiveReload is off by default to keep startup output clean.
+EOF
+}
+
+have_cmd() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+space_available_kb() {
+  df -Pk "$1" 2>/dev/null | awk 'NR == 2 { print $4 }'
+}
+
+ensure_dir() {
+  mkdir -p "$1" 2>/dev/null || return 1
+  [[ -w "$1" ]]
+}
+
+pick_bundle_path() {
+  local candidates=(
+    "${HOME:-}/.local/share/neo-virex/bundle"
+    "${TMPDIR:-/tmp}/neo-virex-${USER:-user}/bundle"
+  )
+  local path
+
+  for path in "${candidates[@]}"; do
+    [[ -n "$path" ]] || continue
+    if ensure_dir "$path"; then
+      printf '%s\n' "$path"
+      return 0
+    fi
+  done
+
+  return 1
+}
+
+pick_destination_dir() {
+  local tmp_base="${TMPDIR:-/tmp}/neo-virex-${USER:-user}"
+  local tmp_site="${tmp_base}/site"
+  local repo_site="${ROOT_DIR}/_site"
+  local tmp_space repo_space
+
+  tmp_space="$(space_available_kb "${TMPDIR:-/tmp}")"
+  repo_space="$(space_available_kb "$ROOT_DIR")"
+
+  if [[ -n "$tmp_space" && "$tmp_space" -ge 131072 ]] && ensure_dir "$tmp_base"; then
+    rm -rf "$tmp_site" 2>/dev/null || true
+    mkdir -p "$tmp_site"
+    printf '%s\n' "$tmp_site"
+    return 0
+  fi
+
+  if [[ -n "$repo_space" && "$repo_space" -ge 131072 ]] && ensure_dir "$repo_site"; then
+    printf '%s\n' "$repo_site"
+    return 0
+  fi
+
+  die "not enough writable space for the generated site in /tmp or the repo"
+}
+
+port_in_use() {
+  local port="$1"
+
+  if have_cmd ss; then
+    ss -ltn "( sport = :${port} )" 2>/dev/null | awk 'NR > 1 { found = 1 } END { exit(found ? 0 : 1) }'
+    return $?
+  fi
+
+  if have_cmd lsof; then
+    lsof -iTCP:"$port" -sTCP:LISTEN -Pn >/dev/null 2>&1
+    return $?
+  fi
+
+  return 1
+}
+
+pick_port() {
+  local candidate="$1"
+  local tries=0
+
+  while port_in_use "$candidate"; do
+    tries=$((tries + 1))
+    if [[ "$tries" -ge 20 ]]; then
+      die "could not find a free port starting from $1"
+    fi
+    candidate=$((candidate + 1))
+  done
+
+  printf '%s\n' "$candidate"
+}
+
+cleanup_stale_local_state() {
+  if [[ -d "${ROOT_DIR}/.jekyll-cache-local" && -w "${ROOT_DIR}/.jekyll-cache-local" ]]; then
+    rm -rf "${ROOT_DIR}/.jekyll-cache-local" 2>/dev/null || true
+  fi
+}
+
+ensure_bundle_ready() {
+  export BUNDLE_WITHOUT="${BUNDLE_WITHOUT:-test}"
+
+  if bundle check >/dev/null 2>&1; then
+    return 0
+  fi
+
+  local bundle_path
+  bundle_path="$(pick_bundle_path)" || die "unable to find a writable location for bundle gems"
+
+  export BUNDLE_PATH="$bundle_path"
+  printf 'Installing missing gems into %s\n' "${BUNDLE_PATH}"
+
+  bundle install || die "bundle install failed; check your network connection and Ruby/Bundler setup"
+}
+
+while (($#)); do
+  case "$1" in
+    -H|--host)
+      [[ $# -ge 2 ]] || die "missing value for $1"
+      HOST="$2"
+      shift 2
+      ;;
+    -P|--port)
+      [[ $# -ge 2 ]] || die "missing value for $1"
+      PORT="$2"
+      shift 2
+      ;;
+    -p|--production)
+      PRODUCTION="true"
+      shift
+      ;;
+    --build)
+      BUILD_ONLY="true"
+      shift
+      ;;
+    --live)
+      LIVE_RELOAD="true"
+      shift
+      ;;
+    --open)
+      OPEN_URL="true"
+      shift
+      ;;
+    --force-polling)
+      FORCE_POLLING="true"
+      shift
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    --)
+      shift
+      EXTRA_ARGS+=("$@")
+      break
+      ;;
+    *)
+      EXTRA_ARGS+=("$1")
+      shift
+      ;;
+  esac
+done
+
+have_cmd bundle || die "'bundle' was not found. Install Bundler first."
+
+cleanup_stale_local_state
+ensure_bundle_ready
+
+DEST_DIR="$(pick_destination_dir)"
+
+if [[ -e /proc/1/cgroup ]] && grep -q docker /proc/1/cgroup; then
+  FORCE_POLLING="true"
+fi
+
+if [[ "$BUILD_ONLY" == "false" ]]; then
+  PORT="$(pick_port "$PORT")"
+fi
+
+BASE_CMD=(bundle exec jekyll)
+
+if [[ "$BUILD_ONLY" == "true" ]]; then
+  BASE_CMD+=(build)
+else
+  BASE_CMD+=(serve -H "$HOST" -P "$PORT")
+fi
+
+BASE_CMD+=(--disable-disk-cache -d "$DEST_DIR")
+
+if [[ "$PRODUCTION" == "true" ]]; then
+  export JEKYLL_ENV=production
+fi
+
+if [[ "$OPEN_URL" == "true" && "$BUILD_ONLY" == "false" ]]; then
+  BASE_CMD+=(--open-url)
+fi
+
+if [[ "$LIVE_RELOAD" == "true" && "$BUILD_ONLY" == "false" ]]; then
+  BASE_CMD+=(-l)
+fi
+
+if [[ "$FORCE_POLLING" == "true" && "$BUILD_ONLY" == "false" ]]; then
+  BASE_CMD+=(--force_polling)
+fi
+
+if [[ ${#EXTRA_ARGS[@]} -gt 0 ]]; then
+  BASE_CMD+=("${EXTRA_ARGS[@]}")
+fi
+
+exec "${BASE_CMD[@]}"

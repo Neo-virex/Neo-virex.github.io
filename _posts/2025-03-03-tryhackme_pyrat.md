@@ -2,7 +2,7 @@
 title: "TryHackMe: Pyrat"
 author: NeoVirex
 categories: [TryHackMe]
-tags: [TryHackMe, Pyrat, CTF, Cybersecurity, Ethical Hacking, Reverse Shell, Privilege Escalation, Python Exploitation, Git Credential Leak, Linux Enumeration, InfoSec, RAT Exploit, Penetration Testing, Beginner CTF, Capture The Flag, THM Walkthrough, Offensive Security, Cybersecurity Training]
+tags: [TryHackMe, Pyrat, CTF, Cybersecurity, Ethical Hacking, Reverse Shell, Privilege Escalation, Python Exploitation, Git Credential Leak, Linux Enumeration, InfoSec, RAT Exploit, Penetration Testing, Beginner CTF, Capture the Flag, THM Walkthrough, Offensive Security, Cybersecurity Training]
 render_with_liquid: false
 media_subpath: /images/tryhackme/tryhackme_pyrat/
 image:

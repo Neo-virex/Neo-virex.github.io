@@ -2,7 +2,7 @@
 title: "TryHackme: SMOL"
 author: NeoVirex
 categories: [TryHackMe]
-tags: [THM, Tryhackme, web, FFUF, ssh, php, python, WPScan]
+tags: [thm, TryHackMe, web, FFUF, ssh, php, python, WPScan]
 render_with_liquid: false
 media_subpath: /images/tryhackme/tryhackme_smol/
 image:

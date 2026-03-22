@@ -1,0 +1,92 @@
+@use '../abstracts/breakpoints' as bp;
+@use '../abstracts/mixins' as mx;
+@use '../abstracts/placeholders';
+
+.access {
+  top: calc(3rem + 1.5rem);
+  transition: top 0.2s ease-in-out;
+  margin-top: 2.5rem;
+  margin-bottom: 4rem;
+
+  &:only-child {
+    position: -webkit-sticky;
+    position: sticky;
+  }
+
+  > section {
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0.8rem 0;
+
+    &:not(:first-child) {
+      margin-top: 1rem;
+    }
+  }
+
+  /* Ensure Recent/Tags stay at the top while TOC follows */
+  position: relative;
+
+  .content {
+    font-size: 0.82rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+  }
+}
+
+#access-lastmod {
+  .content {
+    font-size: 0.82rem;
+    line-height: 1.2;
+  }
+}
+
+#toc-wrapper {
+  top: 6rem;
+  z-index: 10;
+}
+
+#panel-wrapper {
+  /* the headings */
+  .panel-heading {
+    font-family: inherit;
+    line-height: inherit;
+
+    @include mx.label(inherit);
+  }
+
+  .post-tag {
+    display: inline-block;
+    line-height: 1rem;
+    font-size: 0.8rem;
+    border-radius: 0.5rem;
+    padding: 0.2rem 0.4rem;
+    margin: 0 0.15rem 0.3rem 0;
+    white-space: nowrap;
+
+    &:hover {
+      transition: all 0.3s ease-in;
+    }
+  }
+
+  > :last-child {
+    margin-bottom: 4rem;
+  }
+
+  @include bp.lt(bp.get(xl)) {
+    display: none;
+  }
+}
+
+#access-lastmod {
+  a {
+    color: inherit;
+
+    &:hover {
+      @extend %link-hover;
+    }
+
+    @extend %no-bottom-border;
+  }
+}

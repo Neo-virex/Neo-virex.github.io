@@ -2,7 +2,7 @@
 title: 'PCAP Auto Extractor'
 author: Neo-Virex
 date: 2025-09-01 08:00:00 +0000
-categories: [project]
+categories: [Project]
 tags: [pcap, Linux, Exploit]
 render_with_liquid: false
 media_subpath: /images/blogs/pcap/
@@ -304,4 +304,3 @@ For network troubleshooting scenarios:
 PCAP Auto Extractor streamlines the network forensics process by automating the extraction and analysis of packet capture data. Its modular design, comprehensive extraction capabilities, and integration with specialized tools make it a valuable addition to any cybersecurity professional's toolkit.
 
 Whether you're investigating a security incident, analyzing malware, or troubleshooting network issues, PCAP Auto Extractor provides a structured and efficient approach to PCAP analysis. By automating the tedious aspects of data extraction and organization, it allows you to focus on the more important task of interpreting the results and uncovering insights.
-

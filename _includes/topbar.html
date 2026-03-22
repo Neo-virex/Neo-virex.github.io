@@ -1,0 +1,46 @@
+<!-- The Top Bar -->
+
+<header id="topbar-wrapper" class="flex-shrink-0" aria-label="Top Bar">
+  <div id="topbar" class="d-flex align-items-center justify-content-between h-100">
+    <button type="button" id="sidebar-trigger" class="btn btn-link" aria-label="Sidebar">
+      <i class="fas fa-bars fa-fw"></i>
+    </button>
+
+    {% if page.layout == 'post' %}
+      <nav aria-label="Breadcrumb" class="d-none d-lg-flex align-items-center post-breadcrumb ms-2">
+        <a href="{{ '/' | relative_url }}" class="text-muted text-decoration-none" style="font-size: 0.9rem; font-weight: 600;">home</a>
+        <span class="mx-2 text-muted" style="font-size: 0.9rem;">&raquo;</span>
+        <span class="text-muted text-truncate" style="font-size: 0.9rem; font-weight: 500; max-width: 400px;">{{ page.title | truncate: 50 }}</span>
+      </nav>
+    {% else %}
+      <a id="topbar-title" href="{{ '/' | relative_url }}">
+        {{- site.data.locales[include.lang].title | default: site.title -}} <span style="font-size: 1.1em; margin-left: 0.2rem;">🍊</span>
+      </a>
+    {% endif %}
+
+    <nav id="topbar-nav" aria-label="Primary" {% if page.layout == 'post' %}class="d-none"{% endif %}>
+      <a href="{{ '/' | relative_url }}" class="nav-link{% if page.layout == 'home' %} active{% endif %}">
+        {{ site.data.locales[include.lang].tabs.home | default: 'Home' }}
+      </a>
+
+      {% for tab in site.tabs %}
+        {% capture tab_name %}{{ tab.url | split: '/' }}{% endcapture %}
+        <a
+          href="{{ tab.url | relative_url }}"
+          class="nav-link{% if tab.url == page.url %} active{% endif %}"
+        >
+          {{ site.data.locales[include.lang].tabs.[tab_name] | default: tab.title }}
+        </a>
+      {% endfor %}
+    </nav>
+
+    <div class="topbar-actions">
+      <button type="button" id="search-trigger" class="btn btn-link" aria-label="Search">
+        <i class="fas fa-search fa-fw"></i>
+      </button>
+      <button type="button" class="btn btn-link text-decoration-none" id="search-cancel">
+        {{- site.data.locales[include.lang].search.cancel -}}
+      </button>
+    </div>
+  </div>
+</header>

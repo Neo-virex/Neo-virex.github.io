@@ -5,15 +5,11 @@ order: 4
 title: Why Neo-Virex?
 ---
 
-> ⚡ **Why Neo-Virex?**  
-{: .prompt-tip }
+Why did the hacker switch antivirus software?
 
-The name fuses two powerful ideas:
+Because every time something went wrong, he'd shrug and say, "Meh, must be a bug."
 
-- **Neo** – A new way of thinking; modern, bold, and limitless. Inspired by *Neo* from *The Matrix*, symbolizing awakening, innovation, and rebellion against old systems.  
-- **Virex** – A fusion of *virus* and *reflex* — representing sharp instincts, cyber defense, and rapid response to digital threats.
+Then he installed Neo-Virex... and suddenly he had no excuses left.
 
----
-
-> 🧠 **Neo-Virex** is the embodiment of the modern digital defender — fast, intelligent, and always a step ahead.  
-{: .prompt-info }
+Now when something breaks, everyone just looks at him and goes:
+"So... still think it's a bug, or is it you?" 😄

@@ -2,7 +2,7 @@
 title: "Hackthebox: Soulmate"
 author: NeoVirex
 categories: [Hackthebox]
-tags: [CTF, Hackthebox, web, FFUF, ssh, php, python]
+tags: [CTF, HackTheBox, web, FFUF, ssh, php, python]
 render_with_liquid: false
 media_subpath: /images/hackthebox/hackthebox_soulmate
 image:
