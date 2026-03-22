@@ -1,84 +1,43 @@
-<!-- markdownlint-disable-next-line -->
-<div align="center">
+# Neo-Virex Blog
 
-  <!-- markdownlint-disable-next-line -->
-  # Chirpy Jekyll Theme
+This repository contains the Neo-Virex Jekyll blog, configured to build correctly for GitHub Pages and Vercel.
 
-  A minimal, responsive, and feature-rich Jekyll theme for technical writing.
+## Problems Before The Fixes
 
-  [![CI](https://img.shields.io/github/actions/workflow/status/cotes2020/jekyll-theme-chirpy/ci.yml?logo=github)][ci]&nbsp;
-  [![Codacy Badge](https://img.shields.io/codacy/grade/4e556876a3c54d5e8f2d2857c4f43894?logo=codacy)][codacy]&nbsp;
-  [![GitHub license](https://img.shields.io/github/license/cotes2020/jekyll-theme-chirpy?color=goldenrod)][license]&nbsp;
-  [![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy?&logo=RubyGems&logoColor=ghostwhite&label=gem&color=orange)][gem]&nbsp;
-  [![Open in Dev Containers](https://img.shields.io/badge/Dev_Containers-Open-deepskyblue?logo=linuxcontainers)][open-container]
+- GitHub Actions was using Ruby `3.1`, but the resolved gem set required a newer Ruby version, so `bundle install` failed during Pages builds.
+- `Gemfile.lock` only had platform-specific entries and was missing the generic `ruby` platform, which caused Bundler platform warnings and dependency resolution issues in CI.
+- The production Sass build failed because `_sass/main.bundle.scss` imports `vendors/bootstrap`, but `_sass/vendors/_bootstrap.scss` did not exist in the repository.
+- GitHub Pages could deploy successfully and still look outdated because the PWA service worker was caching old content.
+- Vercel was only running `npm run build`, which generated JavaScript assets but did not generate the Jekyll output directory `_site`, so deployments failed with the missing output directory error.
 
-  [**Live Demo** →][demo]
+## What Was Fixed
 
-  [![Devices Mockup](https://chirpy-img.netlify.app/commons/devices-mockup.png)][demo]
+- `.github/workflows/jekyll.yml`
+  Changed the GitHub Actions Ruby version from `3.1` to `3.3`.
 
-</div>
+- `.ruby-version`
+  Added `3.3.8` so local Ruby and CI Ruby match.
 
-## Features
+- `Gemfile.lock`
+  Added the generic `ruby` platform and generic gem entries needed for CI, including `ffi`, `nokogiri`, and `sass-embedded`.
 
-- Dark Theme
-- Localized UI language
-- Pinned Posts on Home Page
-- Hierarchical Categories
-- Trending Tags
-- Table of Contents
-- Last Modified Date
-- Syntax Highlighting
-- Mathematical Expressions
-- Mermaid Diagrams & Flowcharts
-- Dark Mode Images
-- Embed Media
-- Comment Systems
-- Built-in Search
-- Atom Feeds
-- PWA
-- Web Analytics
-- SEO & Performance Optimization
+- `_sass/vendors/_bootstrap.scss`
+  Added the generated Bootstrap vendor stylesheet required by the production Sass build.
 
-## Documentation
+- `_config.yml`
+  Disabled `pwa.enabled` and `pwa.cache.enabled` so new GitHub Pages deployments are not hidden by stale cached content.
 
-To learn how to use, develop, and upgrade the project, please refer to the [Wiki][wiki].
+- `vercel.json`
+  Added Vercel build settings so Vercel installs dependencies, runs the Jekyll build, and outputs to `_site`.
 
-## Contributing
+## Commands Used To Verify The Fixes
 
-Contributions (_pull requests_, _issues_, and _discussions_) are what make the open-source community such an amazing place
-to learn, inspire, and create. Any contributions you make are greatly appreciated.
-For details, see the "[Contributing Guidelines][contribute-guide]".
+- `bundle install --jobs 4`
+- `bundle exec jekyll build`
+- `JEKYLL_ENV=production bundle exec jekyll build --baseurl ""`
+- `npm run build && JEKYLL_ENV=production bundle exec jekyll build --baseurl ""`
 
-## Credits
+## Current Vercel Note
 
-### Contributors
-
-Thanks to [all the contributors][contributors] involved in the development of the project!
-
-[![all-contributors](https://contrib.rocks/image?repo=cotes2020/jekyll-theme-chirpy&columns=16)][contributors]
-<sub> — Made with [contrib.rocks](https://contrib.rocks)</sub>
-
-### Third-Party Assets
-
-This project is built on the [Jekyll][jekyllrb] ecosystem and some [great libraries][lib], and is developed using [VS Code][vscode] as well as tools provided by [JetBrains][jetbrains] under a non-commercial open-source software license.
-
-The avatar and favicon for the project's website are from [ClipartMAX][clipartmax].
-
-## License
-
-This project is published under [MIT License][license].
-
-[gem]: https://rubygems.org/gems/jekyll-theme-chirpy
-[ci]: https://github.com/cotes2020/jekyll-theme-chirpy/actions/workflows/ci.yml?query=event%3Apush+branch%3Amaster
-[codacy]: https://app.codacy.com/gh/cotes2020/jekyll-theme-chirpy/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade
-[license]: https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE
-[open-container]: https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/cotes2020/jekyll-theme-chirpy
-[jekyllrb]: https://jekyllrb.com/
-[clipartmax]: https://www.clipartmax.com/middle/m2i8b1m2K9Z5m2K9_ant-clipart-childrens-ant-cute/
-[demo]: https://cotes2020.github.io/chirpy-demo/
-[wiki]: https://github.com/cotes2020/jekyll-theme-chirpy/wiki
-[contribute-guide]: https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/docs/CONTRIBUTING.md
-[contributors]: https://github.com/cotes2020/jekyll-theme-chirpy/graphs/contributors
-[lib]: https://github.com/cotes2020/chirpy-static-assets
-[vscode]: https://code.visualstudio.com/
-[jetbrains]: https://www.jetbrains.com/?from=jekyll-theme-chirpy
+- The repository contains `vercel.json`, but Vercel dashboard project settings can still override repository settings.
+- If Vercel still runs only `npm run build`, then the dashboard settings need to be updated to match the repository configuration.
