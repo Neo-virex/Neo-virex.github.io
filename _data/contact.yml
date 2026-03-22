@@ -16,6 +16,10 @@
   icon: 'fa-brands fa-reddit'
   url: '' # Will be populated dynamically for sharing
 
+- type: discord
+  icon: 'fab fa-discord'
+  url: '' # Will be populated dynamically for sharing
+
 - type: bluesky
   icon: 'fa-brands fa-bluesky'
   url: '' # Will be populated dynamically for sharing

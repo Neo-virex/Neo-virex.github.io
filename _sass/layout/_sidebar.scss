@@ -247,7 +247,7 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
       padding: 1rem 0 1rem 1rem;
       justify-content: flex-end;
       margin-top: 160px !important;
-      transform: translate(30px, -30px);
+      transform: translateX(30px);
     }
 
     $btn-size: 1.9rem;
