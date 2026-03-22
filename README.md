@@ -44,6 +44,49 @@ This repository contains the Neo-Virex Jekyll blog, configured to build correctl
 
 ## Adding A New Post
 
+There are two stages in this repo:
+
+- `ExportBlock/` contains the raw exported note you start from.
+- `_posts/` contains the final Jekyll post after it is renamed and prepared for publishing.
+
+## ExportBlock Source Pattern
+
+- The source note starts as a normal Markdown file, not a Jekyll post.
+- It does not have YAML front matter.
+- It usually starts with a Markdown title like `# Side Quest 2: Scheme Catcher`.
+- Images are referenced with relative paths pointing to a sibling folder.
+- The sibling folder can contain spaces in its name.
+
+Example source layout:
+
+```text
+ExportBlock/
+  side-quest-2-scheme-catcher-blog.md
+  side-quest 2 Scheme Catcher/
+    room_img.png
+    foothold.png
+    foothold-terminal.png
+    2025-12-11_02-18.png
+```
+
+Example source image reference:
+
+```md
+![foothold.png](side-quest%202%20Scheme%20Catcher/foothold.png)
+```
+
+## Converting ExportBlock Notes Into A Published Post
+
+- Take the exported Markdown file from `ExportBlock/`.
+- Pick the publish date.
+- Pick the final slug.
+- Rename the Markdown file into Jekyll post format.
+- Move the post into `_posts/`.
+- Move the images out of the export folder into the final `images/...` folder used by the site.
+- Replace the raw relative image links with the published post pattern that uses `media_subpath`.
+- Add the YAML front matter at the top.
+- Add the optional style block at the bottom if needed.
+
 - Create the Markdown file in `_posts/`.
 - Use the filename format `YYYY-MM-DD-slug.md`.
 - The filename date controls the publish date.
@@ -79,14 +122,16 @@ images/blogs/hacking_tools/
 
 1. Pick the publish date.
 2. Pick a lowercase slug.
-3. Create the file as `YYYY-MM-DD-slug.md`.
-4. Create the matching image folder under `images/`.
-5. Put the cover image and all screenshots in that folder.
-6. Add the front matter at the top of the Markdown file.
-7. Set `media_subpath` to the matching image folder.
-8. Set `image.path` to the exact cover image filename.
-9. In the post body, reference images by filename only, such as `(img1.png)`.
-10. Add the optional style block at the bottom if you use the `center` or `wrap` helper classes.
+3. Start from the exported note in `ExportBlock/`.
+4. Rename the file to `YYYY-MM-DD-slug.md`.
+5. Move it into `_posts/`.
+6. Create the matching image folder under `images/`.
+7. Move the cover image and all screenshots into that folder.
+8. Add the front matter at the top of the Markdown file.
+9. Set `media_subpath` to the matching image folder.
+10. Set `image.path` to the exact cover image filename.
+11. Rewrite image references in the body to use only the filename, such as `(img1.png)`.
+12. Add the optional style block at the bottom if you use the `center` or `wrap` helper classes.
 
 ### Front Matter Template
 
@@ -129,3 +174,4 @@ Put this at the bottom of the post if you want centered images or wrapped prefor
 - `render_with_liquid: false` prevents Jekyll/Liquid from breaking pasted code or note syntax.
 - `image.path` must match the real cover image filename exactly.
 - The common cover image names in this repo are `room-img.png`, `room_img.png`, and `room-img.jpeg`, so check the exact filename before committing.
+- The raw `ExportBlock/` note format is only the source draft. The published post format in `_posts/` is different and requires manual conversion.
