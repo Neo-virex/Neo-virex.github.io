@@ -1,0 +1,5 @@
+{
+  "installCommand": "npm ci && bundle install",
+  "buildCommand": "npm run build && JEKYLL_ENV=production bundle exec jekyll build --baseurl \"\"",
+  "outputDirectory": "_site"
+}
