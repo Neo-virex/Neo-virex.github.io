@@ -248,6 +248,10 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
       justify-content: flex-end;
       margin-top: 160px !important;
       transform: translateX(30px);
+
+      body[data-layout='home'] & {
+        margin-top: 0px !important;
+      }
     }
 
     $btn-size: 1.9rem;
