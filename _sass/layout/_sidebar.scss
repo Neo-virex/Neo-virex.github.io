@@ -167,6 +167,10 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
 
     @include bp.lg {
       align-items: flex-end; // Match parent profile-wrapper alignment
+
+      body[data-layout='home'] & {
+        transform: translateX(-30px);
+      }
     }
 
     body[data-layout="post"] & {
