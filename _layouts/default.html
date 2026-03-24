@@ -54,14 +54,10 @@ layout: compress
           </main>
 
           <!-- panel -->
-          <aside aria-label="Panel" id="panel-wrapper" class="col-auto ps-4 text-muted" style="width: 300px; max-width: 300px;">
+          <aside aria-label="Panel" id="panel-wrapper" class="col-auto ps-4 text-muted" style="width: 200px; max-width: 300px;">
             <div class="access">
               {% include_cached update-list.html lang=lang %}
-              {% if page.layout == 'post' %}
-                {% include post-tags-panel.html lang=lang %}
-              {% else %}
-                {% include_cached trending-tags.html lang=lang %}
-              {% endif %}
+              {% include_cached trending-tags.html lang=lang %}
             </div>
 
             {% for _include in layout.panel_includes %}
