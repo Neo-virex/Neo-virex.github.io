@@ -4,9 +4,10 @@ author: NeoVirex
 categories: [Project]
 tags: [GPS, app, ]
 render_with_liquid: false
-media_subpath: /images/blog/GPSSimulator/
+media_subpath: /images/blogs/GPSSimulator
 image:
   path: room-img.png
+
 description: "Raw GPS spoofing is easy. Making it look like a real person ran that route is the hard part. GPSSimulator tackles that problem through realistic route shaping, natural pace variation, and a clean setup flow that makes simulation repeatable without friction."
 ---
 
@@ -120,25 +121,28 @@ Realism is not only about movement output. A confusing or error-prone setup flow
 
 ### Setup Flow
 
-<p align="center">
-  <img src="images/main_ask_km.jpg" alt="Distance screen" width="230">
-  <img src="images/pace.jpg" alt="Pace screen" width="230">
-  <img src="images/route_selection.jpg" alt="Route screen" width="230">
+<p>
+  <img src="images/main_ask_km.jpg" alt="Distance screen" width="220" style="float:left; border-radius:12px; margin:0 16px 16px -140px; max-width:100%; height:auto;" />
+  <img src="images/pace.jpg" alt="Pace screen" width="220" style="float:left; border-radius:12px; margin:0 16px 16px -140px; max-width:100%; height:auto;" />
+  <img src="images/route_selection.jpg" alt="Route screen" width="220" style="float:left; border-radius:12px; margin:0 16px 16px -140px; max-width:100%; height:auto;" />
+  <div style="clear:both"></div>
 </p>
 
 ### Simulation And History
 
-<p align="center">
-  <img src="images/progress.jpg" alt="Progress screen" width="230">
-  <img src="images/hist.jpg" alt="History screen" width="230">
+<p>
+  <img src="images/progress.jpg" alt="Progress screen" width="220" style="float:left; border-radius:12px; margin:0 16px 16px -140px; max-width:100%; height:auto;" />
+  <img src="images/hist.jpg" alt="History screen" width="220" style="float:left; border-radius:12px; margin:0 16px 16px -140px; max-width:100%; height:auto;" />
+  <div style="clear:both"></div>
 </p>
 
 ### UI Evolution
 
 The original interface crammed all controls onto one screen. It worked, but setup felt dense and easy to misconfigure.
 
-<p align="center">
-  <img src="images/old.jpg" alt="Old interface" width="280">
+<p>
+  <img src="images/old.jpg" alt="Old interface" width="220" style="float:left; border-radius:12px; margin:0 16px 16px -140px; max-width:100%; height:auto;" />
+  <div style="clear:both"></div>
 </p>
 
 The redesign spread setup across dedicated steps, making each decision clearer and the overall flow easier to follow.
