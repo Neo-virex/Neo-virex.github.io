@@ -186,8 +186,7 @@ The redesign spread setup across dedicated steps, making each decision clearer a
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/GPSSimulator.git
-
+https://github.com/Abr-ahamis/GPSSimulator.git
 # 2. Open the project in Android Studio
 # 3. Let Gradle sync
 # 4. Build and run the app module on your device or emulator
@@ -195,6 +194,10 @@ git clone https://github.com/your-username/GPSSimulator.git
 
 Before starting a simulation, go to **Developer Options -> Select mock location app** and choose GPSSimulator.
 
+```
+GPS-Simulator.apk
+https://github.com/Abr-ahamis/GPSSimulator/releases/download/v1.0.0/GPS-Simulator.apk
+```
 ---
 
 ## Usage
