@@ -10,25 +10,20 @@ image:
 pin: true
 description: "A collection of cybersecurity CTF challenges created for University CTF 2026, featuring Web, Cryptography, and Forensics categories with realistic scenarios, Dockerized setups, and beginner-to-hard level challenges for learning and competition."
 ---
-
-# University CTF Challenges
-## Web Challenges
+### Web Challenges
 - Aria - AI / Role-Switch Prompt Injection / SSRF (Medium - 350pts)
 - The Invoice Forger - LaTeX Injection (Medium - 300pts)
 - System Lock - Password Vulnerability (Medium)
 - (alzymer) - Web Exploitation (Hard)
 - (zoromegbia) - Web Exploitation (Medium)
-## Cryptography Challenges
+### Cryptography Challenges
 - Breaking BitLocker - Password Cracking (Easy - 50pts)
 - Ghost SPN Leak - Kerberoasting (Easy - 50pts)
 - (Werkezebo) - Hash Cracking (Medium)
 - Lunchbox Note - Encoding (Easy)
-## Forensics Challenges
+### Forensics Challenges
 - NoTUSER - Windows Registry Analysis (Easy)
 - Spooler - Network Forensics (Easy)
 - (chinetu) - Docker Log Analysis (Medium)
-
-
-## Purpose
 
 

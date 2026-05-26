@@ -16,7 +16,6 @@ DEST_DIR=""
 EXTRA_ARGS=()
 
 SCRIPT_PATH="${BASH_SOURCE[0]:-$0}"
-BACKUP_PATH="${ROOT_DIR}/start.bak"
 
 die() {
   printf 'Error: %s\n' "$*" >&2
@@ -59,12 +58,6 @@ space_available_kb() {
 ensure_dir() {
   mkdir -p "$1" 2>/dev/null || return 1
   [[ -w "$1" ]]
-}
-
-create_backup() {
-  if [[ -f "$SCRIPT_PATH" && ! -e "$BACKUP_PATH" ]]; then
-    cp -p -- "$SCRIPT_PATH" "$BACKUP_PATH" 2>/dev/null || true
-  fi
 }
 
 ruby_user_bin_dir() {
@@ -324,7 +317,6 @@ while (($#)); do
   esac
 done
 
-create_backup
 ensure_system_prereqs
 cleanup_stale_local_state
 ensure_bundle_ready
