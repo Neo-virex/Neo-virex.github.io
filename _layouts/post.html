@@ -122,8 +122,20 @@ script_includes:
   {% endif %}
 
   <div class="content">
+    {% if page.grouped_subpost and page.parent_collection %}
+      <div class="parent-collection-link">
+        <i class="fa-solid fa-layer-group fa-fw"></i>
+        <span>Part of</span>
+        <a href="{{ page.parent_collection.url | relative_url }}">{{ page.parent_collection.title }}</a>
+      </div>
+    {% endif %}
+
     {{ content }}
   </div>
+
+  {% if page.grouped_post %}
+    {% include grouped-posts.html %}
+  {% endif %}
 
   <div class="post-tail-wrapper text-muted">
     <!-- categories -->

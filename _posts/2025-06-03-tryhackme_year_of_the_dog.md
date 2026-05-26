@@ -212,7 +212,7 @@ dylan@10.10.132.206's password:
 dylan@year-of-the-dog:~$ ls
 user.txt  work_analysis                                                                             
 dylan@year-of-the-dog:~$ cat user.txt
-THM{OTE3MTQyNTM5NzRiN2VjNTQyYWM2M2Ji}                                                               
+                                                               
 dylan@year-of-the-dog:~$       
 ```
 
@@ -963,7 +963,7 @@ dylan@10.10.132.206's password:
 dylan@year-of-the-dog:~$ ls
 user.txt  work_analysis                                                                             
 dylan@year-of-the-dog:~$ cat user.txt
-THM{OTE3MTQyNTM5NzRiN2VjNTQyYWM2M2Ji}                                                               
+                                                               
 dylan@year-of-the-dog:~$ netstat -plnt
 (Not all processes could be identified, non-owned process info                                      
  will not be shown, you would have to be root to see it all.)                                       
@@ -1049,7 +1049,7 @@ $
 
 ## Flage
 
-THM{MzlhNGY……GI0YTc0OWRh}
+
 
 ### Writeups that help me
 

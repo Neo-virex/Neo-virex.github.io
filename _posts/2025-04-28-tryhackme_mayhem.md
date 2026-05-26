@@ -366,7 +366,7 @@ Hyper-V Requirements:      A hypervisor has been detected. Features required for
   [+] Decrypting Response Body
 
 [Decrypted Response - COMMAND_PROC]
-8c:\windows\system32\cmd.exe`/c echo THM{HavOc_C2_DeCRypTing_is_Fun_Fun_FUN}
+8c:\windows\system32\cmd.exe`/c echo 
 
 [+] Parsing Request
   [+] Job Request from Server to Agent
@@ -384,7 +384,7 @@ Hyper-V Requirements:      A hypervisor has been detected. Features required for
   [+] Decrypting Request Body
 
 [Decrypted Request]
-Z?[-)THM{HavOc_C2_DeCRypTing_is_Fun_Fun_FUN}
+Z?[-)
 ?[
 
 [+] Parsing Request
@@ -706,7 +706,7 @@ jrowley5,"mE8#uZV48nU&Mc,5",wcumes5@clientserver.thm
 fbillitteri6,"kX7`\@4#+{a5,",asnalham6@clientserver.thm
 jpowers7,kK2/ix%2i8U6L$A,awarrack7@clientserver.thm
 cpattinson8,wX4\ZmomV78GBRa+,kstickels8@clientserver.thm
-wrait9,THM{I_Can_SEE_ThE_fiL3_YoU_ToOk},fgoodall9@clientserver.thm
+wrait9,,fgoodall9@clientserver.thm
 
 [+] Parsing Request
   [+] Job Request from Server to Agent

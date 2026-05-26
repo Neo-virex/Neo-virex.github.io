@@ -1559,7 +1559,7 @@ C:\Windows\system32>dir c:\Users\Administrator\Desktop
                2 Dir(s)  12,427,550,720 bytes free
 
 C:\Windows\system32>type c:\Users\Administrator\Desktop\flag.txt.txt
-THM{INFILTRA...ERTS}
+
 C:\Windows\system32>
 
 ```

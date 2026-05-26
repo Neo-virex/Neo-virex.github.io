@@ -15,6 +15,9 @@ FORCE_POLLING="false"
 DEST_DIR=""
 EXTRA_ARGS=()
 
+SCRIPT_PATH="${BASH_SOURCE[0]:-$0}"
+BACKUP_PATH="${ROOT_DIR}/start.bak"
+
 die() {
   printf 'Error: %s\n' "$*" >&2
   exit 1
@@ -40,6 +43,7 @@ Notes:
   - Uses '--disable-disk-cache' to avoid stale or permission-broken cache dirs.
   - Builds into /tmp by default so local runs do not depend on repo free space.
   - Installs missing gems automatically for fresh clones.
+  - Falls back to a user-local Bundler install when the system one is missing.
   - LiveReload is off by default to keep startup output clean.
 EOF
 }
@@ -55,6 +59,114 @@ space_available_kb() {
 ensure_dir() {
   mkdir -p "$1" 2>/dev/null || return 1
   [[ -w "$1" ]]
+}
+
+create_backup() {
+  if [[ -f "$SCRIPT_PATH" && ! -e "$BACKUP_PATH" ]]; then
+    cp -p -- "$SCRIPT_PATH" "$BACKUP_PATH" 2>/dev/null || true
+  fi
+}
+
+ruby_user_bin_dir() {
+  if have_cmd ruby; then
+    ruby -rrubygems -e 'print File.join(Gem.user_dir, "bin")' 2>/dev/null || true
+  fi
+}
+
+add_user_gem_bins_to_path() {
+  local path candidate
+  path="$(ruby_user_bin_dir)"
+  if [[ -n "$path" && -d "$path" ]]; then
+    case ":$PATH:" in
+      *":$path:"*) ;;
+      *) PATH="$path:$PATH" ;;
+    esac
+  fi
+
+  for candidate in \
+    "${HOME:-}/.local/share/gem/ruby/3.2.0/bin" \
+    "${HOME:-}/.gem/ruby/3.2.0/bin" \
+    "${HOME:-}/.local/bin" \
+    "/usr/local/bin"; do
+    if [[ -d "$candidate" ]]; then
+      case ":$PATH:" in
+        *":$candidate:"*) ;;
+        *) PATH="$candidate:$PATH" ;;
+      esac
+    fi
+  done
+
+  export PATH
+}
+
+read_locked_bundler_version() {
+  local lockfile="${ROOT_DIR}/Gemfile.lock"
+  [[ -f "$lockfile" ]] || return 1
+  awk '
+    /^BUNDLED WITH$/ { found = 1; next }
+    found && $1 ~ /^[0-9]/ { print $1; exit }
+  ' "$lockfile"
+}
+
+ensure_system_prereqs() {
+  if have_cmd ruby && have_cmd gem; then
+    return 0
+  fi
+
+  if have_cmd sudo && ! have_cmd ruby; then
+    sudo apt-get update && sudo apt-get install -y ruby-full build-essential
+  fi
+}
+
+install_user_bundler() {
+  local version="${1:-}"
+
+  if ! have_cmd gem; then
+    return 1
+  fi
+
+  if [[ -n "$version" ]]; then
+    gem install --user-install bundler -v "$version" -N >/dev/null 2>&1 || return 1
+  else
+    gem install --user-install bundler -N >/dev/null 2>&1 || return 1
+  fi
+
+  add_user_gem_bins_to_path
+  return 0
+}
+
+resolve_bundle_cmd() {
+  local locked_version=""
+  add_user_gem_bins_to_path
+
+  if locked_version="$(read_locked_bundler_version 2>/dev/null || true)"; then
+    if [[ -n "$locked_version" ]]; then
+      if bundle "_${locked_version}_" --version >/dev/null 2>&1; then
+        BUNDLE_CMD=(bundle "_${locked_version}_")
+        return 0
+      fi
+
+      install_user_bundler "$locked_version" || true
+      add_user_gem_bins_to_path
+      if bundle "_${locked_version}_" --version >/dev/null 2>&1; then
+        BUNDLE_CMD=(bundle "_${locked_version}_")
+        return 0
+      fi
+    fi
+  fi
+
+  if have_cmd bundle; then
+    BUNDLE_CMD=(bundle)
+    return 0
+  fi
+
+  install_user_bundler "" || true
+  if have_cmd bundle; then
+    BUNDLE_CMD=(bundle)
+    return 0
+  fi
+
+  return 1
 }
 
 pick_bundle_path() {
@@ -139,17 +251,29 @@ cleanup_stale_local_state() {
 ensure_bundle_ready() {
   export BUNDLE_WITHOUT="${BUNDLE_WITHOUT:-test}"
 
-  if bundle check >/dev/null 2>&1; then
-    return 0
-  fi
+  resolve_bundle_cmd || die "Bundler was not found. Install Bundler with: gem install --user-install bundler"
 
   local bundle_path
   bundle_path="$(pick_bundle_path)" || die "unable to find a writable location for bundle gems"
-
   export BUNDLE_PATH="$bundle_path"
-  printf 'Installing missing gems into %s\n' "${BUNDLE_PATH}"
 
-  bundle install || die "bundle install failed; check your network connection and Ruby/Bundler setup"
+  if "${BUNDLE_CMD[@]}" check >/dev/null 2>&1; then
+    return 0
+  fi
+
+  printf 'Installing missing gems into %s\n' "${BUNDLE_PATH}"
+  "${BUNDLE_CMD[@]}" install || {
+    local locked_version=""
+    locked_version="$(read_locked_bundler_version 2>/dev/null || true)"
+    if [[ -n "$locked_version" ]]; then
+      install_user_bundler "$locked_version" || true
+      resolve_bundle_cmd || true
+      "${BUNDLE_CMD[@]}" install || die "bundle install failed even after retrying Bundler setup"
+      return 0
+    fi
+
+    die "bundle install failed; check your network connection and Ruby/Bundler setup"
+  }
 }
 
 while (($#)); do
@@ -200,8 +324,8 @@ while (($#)); do
   esac
 done
 
-have_cmd bundle || die "'bundle' was not found. Install Bundler first."
-
+create_backup
+ensure_system_prereqs
 cleanup_stale_local_state
 ensure_bundle_ready
 
@@ -215,7 +339,7 @@ if [[ "$BUILD_ONLY" == "false" ]]; then
   PORT="$(pick_port "$PORT")"
 fi
 
-BASE_CMD=(bundle exec jekyll)
+BASE_CMD=("${BUNDLE_CMD[@]}" exec jekyll)
 
 if [[ "$BUILD_ONLY" == "true" ]]; then
   BASE_CMD+=(build)

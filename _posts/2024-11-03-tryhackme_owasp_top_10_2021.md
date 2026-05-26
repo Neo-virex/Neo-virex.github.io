@@ -417,7 +417,7 @@ unnamed.png
 web_app_dev.jpg
 
 RCE $ cat /../../opt/flag.txt
-THM{But_1ts_n0t_my_f4ult!}
+
 
 RCE $ 
 
@@ -695,7 +695,7 @@ You need to trick the server into connecting to your own IP by editing the link 
 
 After you visit the modified URL, check your terminal. You’ll see a request come in from the server, and inside that request, there will be an API key.
 
-**Answer:** `THM{Hello_Im_just_an_API_key}`
+**Answer:** ``
 
 ### 4. **Can you use SSRF to access the admin page?**
 

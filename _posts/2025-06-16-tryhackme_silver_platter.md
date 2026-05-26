@@ -243,7 +243,7 @@ Last login: Tue Jun  3 18:23:58 2025 from 10.9.2.128
 tim@silver-platter:~$ ls
 user.txt
 tim@silver-platter:~$ cat user.txt
-THM{c4ca4238a0b923820dcc509a6f75849b}
+
 tim@silver-platter:~$ 
 ```
 
@@ -321,7 +321,7 @@ root@silver-platter:/# cd root
 root@silver-platter:~# ls
 root.txt  snap  start_docker_containers.sh
 root@silver-platter:~# cat root.txt
-THM{098f6bcd4621d373cade4e832627b4f6}
+
 root@silver-platter:~# 
 ```
 <style>

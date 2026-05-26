@@ -102,7 +102,7 @@ $ ls
 chatbot
 user.txt
 $ cat user.txt
-THM{82f9d06e-9a52-44d5-98c2-aef647805216}
+
 $ python3 -c 'import pty; pty.spawn("/bin/bash")'
 web@socbot3000:~$ ls
 ```
@@ -451,7 +451,7 @@ Last login: Thu Jan  1 00:00:10 1970
 root@socbot3000:~# ls
 root.txt  snap
 root@socbot3000:~# cat root.txt
-THM{583d5e19-4e61-47f1-b98e-5ece3b2d41db}
+
 root@socbot3000:~# 
 
 ```
@@ -518,14 +518,7 @@ root@socbot3000:~# cd .ssh
 root@socbot3000:~/.ssh# ls
 authorized_keys  id_ed25519  id_ed25519.pub
 root@socbot3000:~/.ssh# cat id_ed25519
------BEGIN OPENSSH PRIVATE KEY-----
-b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABAELOYujt
-/vluUdyS/U7ZndAAAAGAAAAAEAAAAzAAAAC3NzaC1lZDI1NTE5AAAAIGT9FlPyzrv+aUra
-DIDA8Q5nTOhHZ0IpHfpbQDIs/ph/AAAAoDMzy/jLhDwOxhUUP+1NiVFSG7XAdtc8fNeTPI
-XN6WKNqQD94nB1iOqzmN7g55slKuxmANcieQGkKYUibOiI16Hp+pOakUq16Vuj0PFZdKLe
-gMNn4lfTDF6EsNQOMP1oF7L8MJcpySn1qCWm1ocso0CHDgsD3Xj0dOTXaTYxehnupB0vJR
-FLHQ6nBC63Zb8VP9GxtfiSewAd+OkRPe8B/3c=
------END OPENSSH PRIVATE KEY-----
+[REDACTED OPENSSH PRIVATE KEY]
 root@socbot3000:~/.ssh# cat authorized_keys 
 no-port-forwarding,no-agent-forwarding,no-X11-forwarding,command="echo 'Please login as the user \"ubuntu\" rather than the user \"root\".';echo;sleep 10;exit 142" ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCKRBDPIgwf5ZmB7TXfzkL6BD94dEqBYggDlk0Yzr00w22mJgSeGmuvKVTrwOpKsV40MZLOP45nfBTnCov8N2shzeEU5lGj6Psz9IUeU2S+sNxmdn8Ooyy1BkbfBODrGWiUqmRMAizZpVPeOdkPHVw+k3ln1zmlg7PeFYmEye5p00Ufi4wd9iIpjxc7mmHMj/UhS4Hk0PBL2G4kFwBJMd/oOGRz1OEKUXeYQgv+9JqCUkXCUNh0GKkbVCWL/nDd3J4FNqPBurAS4AZSqn7n1E/dZEXg2sICKoFc+kg47SN81Jbjc4ohU7oYrBi6CpynMdMpS4jIWBebU6Arq9Ezbn4b cmnatic
 no-port-forwarding,no-agent-forwarding,no-X11-forwarding,command="echo 'Please login as the user \"ubuntu\" rather than the user \"root\".';echo;sleep 10;exit 142" ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCFl81YyxRe7IzPaLSYOlUALE52it7X2MGY8OpYaP48HY73Dppw6paBdT5fyLSr30gdCkbWBWJxh9jAaRdCu/Wj/YdF5X6GrkfIka2ATmeF/6bck8twVi2QN5vGjovmdPfT4TquBmUosHa1czu/8gHQeviXb6zPzvG0G5JHSn37WQJbKj6gzm+G9zNuf3VbwrC82siO8w2SMwBknjYQwC0N5YlXEO+qhI36faowKoAZewZzr4JzoDhLBkhWj+EwM31m4l1dBheLP0t/j2GErJAGnu0AAomoxrtENRyc4ujq09sRCOFxfKZfLBXo51OGiw350HSYFYhGCmxYSVt6zldV fredmoore.damian
@@ -637,18 +630,12 @@ Enter your hacker alias (max 20 chars): neo
 
 [!] Copy this **PRIVATE KEY** now and keep it safe. You won’t be shown it again.
 
------BEGIN OPENSSH PRIVATE KEY-----
-b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
-QyNTUxOQAAACCKzT0yQjUh+mfwWg+11EnOiGFidGXCs/vVUPnK1FKXQQAAAJCBZwMjgWcD
-IwAAAAtzc2gtZWQyNTUxOQAAACCKzT0yQjUh+mfwWg+11EnOiGFidGXCs/vVUPnK1FKXQQ
-AAAEA5YEsjPhDZlpOrQZkW7WQj9Aw+QB5cGyhayyG6dS5y4orNPTJCNSH6Z/BaD7XUSc6I
-YWJ0ZcKz+9VQ+crUUpdBAAAAB3Jvb3RAZGIBAgMEBQY=
------END OPENSSH PRIVATE KEY-----
+[REDACTED OPENSSH PRIVATE KEY]
 You can save it as, e.g., ./malhare_ed25519 and run:
     chmod 600 ./malhare_ed25519
     ssh -i ./malhare_ed25519 neo@10.200.171.11
 
-As a final reward, your flag for making it this far: THM{114136cc-e9ab-4303-a825-18cb24d60d90}
+As a final reward, your flag for making it this far: 
 Farewell, burrower. The warren awaits…
 
 Connection to 10.200.171.11 closed.

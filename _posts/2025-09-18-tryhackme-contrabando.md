@@ -537,7 +537,7 @@ root@contrabando:/home/hansolo# cd /root
 root@contrabando:~# ls
 password  root.txt  secrets  smug  snap
 root@contrabando:~# cat root.txt
-THM{All_AbouT_PassW0rds}
+
 root@contrabando:~# 
 
 ```

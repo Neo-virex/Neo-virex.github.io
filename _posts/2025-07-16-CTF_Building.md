@@ -97,7 +97,7 @@ The BUNNA CTF guides players through a layered series of challenges: starting wi
 
 ```python
 # app.py excerpt
-SECRET_KEY = "ctf{first_key}"
+SECRET_KEY = ""
 @app.route("/submit", methods=["POST"])
 def submit_key():
     if request.form["server_key"] == SECRET_KEY:
@@ -367,7 +367,7 @@ stegcracker picture.jpg /usr/share/wordlists/rockyou.txt
 
 ## ✅ Step 2: Key Validation Logic
 
-- Store the correct key (e.g., `"ctf{first_key}"`)
+- Store the correct key (e.g., `""`)
 - If the submitted key is correct:
     - Respond with a success message
     - Trigger other services/ports
@@ -689,7 +689,7 @@ import subprocess
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
-SECRET_KEY = "ctf{first_key}"
+SECRET_KEY = ""
 
 @app.route("/", methods=["GET"])
 def index():
@@ -2169,7 +2169,7 @@ ls -l vuln
 
 ```bash
 sudo mkdir -p /mimi
-echo "FLAG{You_found_the_mimi_flag_and_escalated_privileges!}" | sudo tee /mimi/flag.txt > /dev/null
+echo "" | sudo tee /mimi/flag.txt > /dev/null
 sudo chmod 400 /mimi/flag.txt
 sudo chown root:root /mimi/flag.txt
 

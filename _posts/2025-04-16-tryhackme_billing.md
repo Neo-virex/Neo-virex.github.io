@@ -937,7 +937,7 @@ filename
 passwordMysql.log
 root.txt
 cat root.txt
-THM{33ad5b530e******f424ec23fae60}
+
 
 [*] 10.10.201.100 - Meterpreter session 1 closed.  Reason: Died
 ^C

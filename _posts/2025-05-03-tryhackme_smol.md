@@ -845,9 +845,7 @@ ls
 authorized_keys  id_rsa  id_rsa.pub
 diego@smol:/home/think/.ssh$ cat id_rsa
 cat id_rsa
------BEGIN OPENSSH PRIVATE KEY-----
-b3BlbnNza----
------END OPENSSH PRIVATE KEY-----
+[REDACTED OPENSSH PRIVATE KEY]
 diego@smol:/home/think/.ssh$ 
 
 ```
@@ -855,9 +853,7 @@ diego@smol:/home/think/.ssh$
 ### ssh key
 
 ```jsx
------BEGIN OPENSSH PRIVATE KEY-----
-b3BlbnNzaC1r-----
------END OPENSSH PRIVATE KEY-----
+[REDACTED OPENSSH PRIVATE KEY]
 
 ```
 

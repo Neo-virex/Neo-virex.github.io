@@ -65,7 +65,7 @@ crunch 3 3 0123456789ABCDEF -o 3digits.txt
 
 ### flag
 
-THM{pin********force}
+
 
 ![Screenshot From 2025-02-27 10-24-10.png](img2.png){: width="600" height="150" .shadow }
 
@@ -136,7 +136,7 @@ Password: Happiness
 
 
 ```bash
-THM{m3rrY4n**hiden**1crAft$}
+
 ```
 
 ## [Day 5] Reverse engineering A Christmas DOScovery: Tapes of Yule-tide Past
@@ -226,7 +226,7 @@ ubuntu@tryhackme:~/Desktop/artefacts$
 
 ```
 
-Answer: **THM{a_gift_for_**hiden**_awesome_analyst!}**
+Answer: ****
 
 
 
@@ -370,7 +370,7 @@ Also, I shouldn't need to mention this, but PLEASE DELETE this Note.txt file aft
 
 -Gr33dstr
 
-THM{b06674fed****************76d3d51409e}
+
 
 C:\Users\Administrator\Desktop>dir
 dir                                                                         
@@ -579,7 +579,7 @@ d-----       11/22/2023  10:56 AM                chatlog_files
 -a----       10/16/2023   7:33 AM             17 flag.txt
 
 *Evil-WinRM* PS C:\Users\Administrator\Desktop> type flag.txt
-THM{XMAS_****hiden****_SAFE}
+
 *Evil-WinRM* PS C:\Users\Administrator\Desktop> 
 
 
